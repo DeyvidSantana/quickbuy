@@ -11,5 +11,9 @@ namespace QuickBuy.Repository.Context
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<FormPayment> FormPayment { get; set; }
+
+        public QuickBuyContext(DbContextOptions options) : base(options)
+        {
+        }
     }
 }
