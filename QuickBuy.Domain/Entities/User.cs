@@ -12,7 +12,7 @@ namespace QuickBuy.Domain.Entities
         /// <summary>
         /// A user may have no or many orders
         /// </summary>
-        public ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
 
         public override void Validate()
         {

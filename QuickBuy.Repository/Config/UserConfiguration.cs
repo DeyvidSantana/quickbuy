@@ -27,6 +27,9 @@ namespace QuickBuy.Repository.Config
                 .Property(u => u.LastName)
                 .IsRequired()
                 .HasMaxLength(30);
+            builder
+                .HasMany(u => u.Orders)
+                .WithOne(o => o.User);
         }
     }
 }

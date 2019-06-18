@@ -23,19 +23,19 @@ namespace QuickBuy.Repository.Config
             builder
                 .Property(o => o.CEP)
                 .IsRequired()
-                .HasMaxLength(20);
+                .HasMaxLength(10);
             builder
                 .Property(o => o.State)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(100);
             builder
                 .Property(o => o.City)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(100);
             builder
                 .Property(o => o.FullAddress)
                 .IsRequired()
-                .HasMaxLength(150);
+                .HasMaxLength(100);
             builder
                 .Property(o => o.NumberAddress)
                 .IsRequired();

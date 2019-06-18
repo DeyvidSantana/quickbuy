@@ -11,6 +11,7 @@ namespace QuickBuy.Domain.Entities
         public int Id { get; set; }
         public DateTime OrderDate { get; set; }
         public int UserId { get; set; }
+        public User User { get; set; }
         public DateTime ExpectedDeliveryDate { get; set; }
         public string CEP { get; set; }
         public string State { get; set; }

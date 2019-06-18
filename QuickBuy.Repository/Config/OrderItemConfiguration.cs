@@ -9,7 +9,11 @@ namespace QuickBuy.Repository.Config
     {
         public void Configure(EntityTypeBuilder<OrderItem> builder)
         {
-            throw new NotImplementedException();
+            builder
+                .HasKey(i => i.Id);
+            builder
+                .Property(i => i.Amount)
+                .IsRequired();
         }
     }
 }

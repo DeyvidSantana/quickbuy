@@ -14,11 +14,11 @@ namespace QuickBuy.Repository.Config
             builder
                 .Property(p => p.Name)
                 .IsRequired()
-                .HasMaxLength(30);
+                .HasMaxLength(50);
             builder
                 .Property(p => p.Description)
                 .IsRequired()
-                .HasMaxLength(200);
+                .HasMaxLength(400);
             builder
                 .Property(p => p.Price)
                 .IsRequired();
