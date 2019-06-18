@@ -7,7 +7,7 @@ namespace QuickBuy.Domain.Entities
 {
     public abstract class Entity
     {
-        public List<string> messagesValidation;
+        private List<string> messagesValidation;
         private List<string> MessagesValidation
         {
             get { return messagesValidation ?? (messagesValidation = new List<string>()); }
