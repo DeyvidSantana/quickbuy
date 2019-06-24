@@ -8,17 +8,12 @@
         public decimal Price { get; set; }
 
         public override void Validate()
-        {
-            ClearMessagesValidation();
-            
+        {            
             if (string.IsNullOrEmpty(Name))
                 AddValidation("Name must be filled.");
 
             if (string.IsNullOrEmpty(Description))
                 AddValidation("Description must be filled.");
-
-            if (Price == 0)
-                AddValidation("Price cannot be zero.");
         }
     }
 }

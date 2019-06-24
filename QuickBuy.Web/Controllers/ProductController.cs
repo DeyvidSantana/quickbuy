@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QuickBuy.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[Controller]")]
     public class ProductController : Controller
     {
         private readonly IProductRepository _productRepository;
@@ -27,7 +27,7 @@ namespace QuickBuy.Web.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ex.ToString());
             }
         }
 
@@ -36,12 +36,17 @@ namespace QuickBuy.Web.Controllers
         {
             try
             {
+                if(product == null)
+                {
+                    return BadRequest("Product parameter is null!");
+                }
+
                 _productRepository.Add(product);
                 return Created("api/product", product);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ex.ToString());
             }
         }
     }
