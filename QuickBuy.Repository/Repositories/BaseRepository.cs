@@ -8,40 +8,43 @@ namespace QuickBuy.Repository.Repositories
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
-        private readonly QuickBuyContext _quickBuyContext;
+        protected readonly QuickBuyContext QuickBuyContext;
 
         public BaseRepository(QuickBuyContext quickBuyContext)
         {
-            _quickBuyContext = quickBuyContext;
+            QuickBuyContext = quickBuyContext;
         }
         public void Add(TEntity entity)
         {
-            _quickBuyContext.Set<TEntity>().Add(entity);
+            QuickBuyContext.Set<TEntity>().Add(entity);
+            QuickBuyContext.SaveChanges();
         }
 
         public void Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+            QuickBuyContext.Set<TEntity>().Remove(entity);
+            QuickBuyContext.SaveChanges();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            QuickBuyContext.Dispose();
         }
 
         public TEntity FindById(int id)
         {
-            throw new NotImplementedException();
+            return QuickBuyContext.Set<TEntity>().Find(id);
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            return _quickBuyContext.Set<TEntity>().ToList();
+            return QuickBuyContext.Set<TEntity>().ToList();
         }
 
         public void Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            QuickBuyContext.Set<TEntity>().Update(entity);
+            QuickBuyContext.SaveChanges();
         }
     }
 }
