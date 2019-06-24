@@ -40,11 +40,7 @@ namespace QuickBuy.Repository.Config
                 .Property(o => o.NumberAddress)
                 .IsRequired();
             builder
-                .Property(o => o.FormPaymentId)
-                .IsRequired();
-            builder
-                .Property(o => o.FormPayment)
-                .IsRequired();
+                .HasOne(o => o.FormPayment);
 
         }
     }

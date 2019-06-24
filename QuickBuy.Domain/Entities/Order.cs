@@ -11,7 +11,7 @@ namespace QuickBuy.Domain.Entities
         public int Id { get; set; }
         public DateTime OrderDate { get; set; }
         public int UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
         public DateTime ExpectedDeliveryDate { get; set; }
         public string CEP { get; set; }
         public string State { get; set; }
@@ -19,11 +19,11 @@ namespace QuickBuy.Domain.Entities
         public string FullAddress { get; set; }
         public int NumberAddress { get; set; }
         public int FormPaymentId { get; set; }
-        public FormPayment FormPayment { get; set; }
+        public virtual FormPayment FormPayment { get; set; }
         /// <summary>
         /// Order must have at least one order item or many
         /// </summary>
-        public ICollection<OrderItem> OrderItems { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
 
         public override void Validate()
         {
