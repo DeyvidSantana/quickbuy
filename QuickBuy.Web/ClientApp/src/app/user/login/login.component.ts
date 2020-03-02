@@ -8,12 +8,18 @@ import { Component } from "@angular/core";
 })
 export class LoginComponent {
     public user;
+    public authenticatedUser: boolean;
 
     constructor(){
         this.user = new User();
     }
 
     onSubmit(){
+        if(this.user.email == "sdsdeyvidh@hotmail.com" &&
+            this.user.password == "nascimento"){
+                this.authenticatedUser = true;
+            }
+
         console.log("E-mail: " + this.user.email + "\nPassword: " + this.user.password);
     }
 }
