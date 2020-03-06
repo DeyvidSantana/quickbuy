@@ -1,3 +1,4 @@
+import { RoutesGuard } from './authorization/routes.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -31,7 +32,7 @@ import { LoginComponent } from './user/login/login.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'product', component: ProductComponent },
+      { path: 'product', component: ProductComponent, canActivate: [RoutesGuard] },
       { path: 'login', component: LoginComponent }
     ])
   ],
