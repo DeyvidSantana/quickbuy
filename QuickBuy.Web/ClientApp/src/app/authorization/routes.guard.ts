@@ -11,7 +11,7 @@ export class RoutesGuard implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean  {
-        var autenticated = localStorage.getItem("authenticated-user");
+        var autenticated = sessionStorage.getItem("authenticated-user");
         if(autenticated == "1"){
             return true;
         }
