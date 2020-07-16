@@ -1,3 +1,4 @@
+import { UserService } from './../services/user/user.service';
 import { Injectable } from "@angular/core";
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 
@@ -6,13 +7,14 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 })
 export class RoutesGuard implements CanActivate {
 
-    constructor(private router: Router){
+    constructor(private router: Router,
+                private userService: UserService){
         
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean  {
-        var autenticated = sessionStorage.getItem("authenticated-user");
-        if(autenticated == "1"){
+        
+        if(this.userService.authenticatedUser()){
             return true;
         }
         this.router.navigate(['/login'], { queryParams: {returnUrl:state.url}});        

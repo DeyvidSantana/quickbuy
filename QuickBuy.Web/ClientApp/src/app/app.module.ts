@@ -12,6 +12,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ProductComponent } from './product/product.component';
 import { LoginComponent } from './user/login/login.component';
+import { UserService } from './services/user/user.service';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { LoginComponent } from './user/login/login.component';
       { path: 'login', component: LoginComponent }
     ])
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

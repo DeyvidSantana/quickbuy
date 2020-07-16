@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from './../../models/user';
 import { Component, OnInit } from "@angular/core";
@@ -11,8 +12,11 @@ export class LoginComponent implements OnInit {
     public user;
     public authenticatedUser: boolean;
     public returnUrl: string;
+    public message: string;
 
-    constructor(private router: Router, private activatedRoute: ActivatedRoute){}
+    constructor(private router: Router, 
+                private activatedRoute: ActivatedRoute,
+                private userService: UserService){}
 
     ngOnInit(): void {
         this.user = new User();
@@ -22,12 +26,20 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit(){
-        if(this.user.email == "sdsdeyvidh@hotmail.com" &&
-            this.user.password == "nascimento"){
-                sessionStorage.setItem("authenticated-user","1");
+        this.userService.checkUser(this.user).subscribe(user => {
+            //sessionStorage.setItem("authenticated-user", "1");
+            this.userService.user = user;
+            
+            if(this.returnUrl == null){
+                this.router.navigate(["/"]);
+            } else {
                 this.router.navigate([this.returnUrl]);
-                this.authenticatedUser = true;
-            }
+            }            
+        },
+        error => {
+            console.log(error)
+            this.message = error.error;
+        });
     }
 
     setReturnUrl(queryParam){        

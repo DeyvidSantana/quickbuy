@@ -37,6 +37,7 @@ namespace QuickBuy.Web
 
             // Used to make DI (Dependency Injection).
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -79,8 +80,8 @@ namespace QuickBuy.Web
 
                 if (env.IsDevelopment())
                 {
-                    //spa.UseAngularCliServer(npmScript: "start");
-                    spa.UseProxyToSpaDevelopmentServer("https://localhost:4200/");
+                    spa.UseAngularCliServer(npmScript: "start");
+                    //spa.UseProxyToSpaDevelopmentServer("https://localhost:4200/");
                 }
             });
         }

@@ -46,6 +46,12 @@
     
     <input type="submit" class="btn btn-primary btn-block" value="Login" (click)="onSubmit()">
     
+    <br>
+
+    <div class="alert alert-danger" *ngIf="message">
+      {{ message }}
+    </div>
+
     <img src="../../../assets/img/quickbuy-logo.jpg" />
 
     
