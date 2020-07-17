@@ -44,8 +44,10 @@
       Password must be filled!
     </div>
     
-    <input type="submit" class="btn btn-primary btn-block" value="Login" (click)="onSubmit()">
-    
+    <button class="btn btn-primary btn-block mb-3" type="submit" (click)="onSubmit()" [disabled]="spinner">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="spinner"></span>
+        Login
+      </button>    
     <br>
 
     <div class="alert alert-danger" *ngIf="message">

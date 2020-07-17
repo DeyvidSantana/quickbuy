@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
     public authenticatedUser: boolean;
     public returnUrl: string;
     public message: string;
+    public spinner: boolean;
 
     constructor(private router: Router, 
                 private activatedRoute: ActivatedRoute,
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit(){
+        this.spinner = true;
         this.userService.checkUser(this.user).subscribe(user => {
             //sessionStorage.setItem("authenticated-user", "1");
             this.userService.user = user;
@@ -39,6 +41,7 @@ export class LoginComponent implements OnInit {
         error => {
             console.log(error)
             this.message = error.error;
+            this.spinner = false;
         });
     }
 
