@@ -1,0 +1,89 @@
+<div class="text-center">
+    <form class="form-signin">
+        <h6 class="mb-4 login">Create account!</h6>
+
+        <div class="form-group">
+            <label for="inputEmail" class="sr-only">E-mail</label>
+            <input type="email" id="inputEmail" name="email" placeholder="E-mail" class="form-control mb-2" [ngClass]="{
+                'is-invalid': email.invalid && (email.dirty || email.touched),
+                'is-valid': email.valid && (email.dirty || email.touched)
+               }" [(ngModel)]="user.email" #email="ngModel" email required />
+        </div>
+
+        <div class="invalid-feedback mb-2" *ngIf="email.invalid &&
+        (email.dirty || email.touched)">
+            <div *ngIf="email.errors?.required">
+                Email must be filled!
+            </div>
+            <div *ngIf="email.errors?.email">
+                Email is in invalid format!
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" name="password" placeholder="Password" class="form-control mb-2"
+                [ngClass]="{
+                'is-invalid': password.invalid && (password.dirty || password.touched),
+                'is-valid': password.valid && (password.dirty || password.touched)
+               }" [(ngModel)]="user.password" #password="ngModel" required />
+        </div>
+
+        <div class="invalid-feedback mb-2" *ngIf="password.invalid && 
+        (password.dirty || password.touched)">
+            <div *ngIf="password.errors?.required">
+                Password must be filled!
+            </div>            
+        </div>
+
+        <div class="form-group">
+            <label for="inputName" class="sr-only">Name</label>
+            <input type="text" id="inputName" name="name" placeholder="Name" class="form-control mb-2" [ngClass]="{
+                'is-invalid': name.invalid && (name.dirty || name.touched),
+                'is-valid': name.valid && (name.dirty || name.touched)
+               }" [(ngModel)]="user.name" #name="ngModel" required />
+        </div>
+
+        <div class="invalid-feedback mb-2" *ngIf="name.invalid &&
+        (name.dirty || name.touched)">
+            <div *ngIf="name.errors?.required">
+                Name must be filled!
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputLastName" class="sr-only">Lastname</label>
+            <input type="text" id="inputLastName" name="lastName" placeholder="Lastname" class="form-control mb-2"
+                [ngClass]="{
+                'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched),
+                'is-valid': lastName.valid && (lastName.dirty || lastName.touched)
+               }" [(ngModel)]="lastName.name" #lastName="ngModel" required />
+        </div>
+
+        <div class="invalid-feedback mb-2" *ngIf="lastName.invalid &&
+        (lastName.dirty || lastName.touched)">
+            <div *ngIf="lastName.errors?.required">
+                Lastname must be filled!
+            </div>
+        </div>
+
+        <button class="btn btn-primary btn-block mb-3" type="submit" (click)="register()" [disabled]="spinner">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="spinner"></span>
+            Register
+        </button>
+        <a [routerLink]='["/login"]'>Back</a>
+        <br>
+
+        <div class="alert alert-danger" *ngIf="message">
+            {{ message }}
+        </div>
+
+        <img src="../../../assets/img/quickbuy-logo.jpg" />
+
+
+        <div class="alert alert-info" *ngIf="authenticatedUser">
+            Authenticated User!
+        </div>
+
+    </form>
+</div>

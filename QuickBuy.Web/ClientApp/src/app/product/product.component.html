@@ -1,0 +1,69 @@
+<h1 class="h4 title">Product Registration</h1>
+<label for="inputName" class="sr-only"></label>
+<input type="text" id="inputName" 
+name="name"
+placeholder="Product name" 
+class="form-control mb-2 col-md-4"
+[ngClass]="{
+    'is-invalid': name.invalid && (name.dirty || name.touched),
+    'is-valid': name.valid && (name.dirty || name.touched)
+   }"
+[(ngModel)]="product.name" 
+#name="ngModel" 
+required/>
+
+<div class="invalid-feedback mb-2" *ngIf="name.invalid && (name.dirty || name.touched)">
+    <div *ngIf="name.errors?.required">
+        Product name must be filled!
+    </div>
+</div>
+
+
+<label for="inputDescription" class="sr-only"></label>
+<input type="text" id="inputDescription" 
+name="descriptionProduct"
+placeholder="Product description" 
+class="form-control mb-2 col-md-4"
+[ngClass]="{
+    'is-invalid': description.invalid && (description.dirty || description.touched),
+    'is-valid': description.valid && (description.dirty || description.touched)
+   }"
+[(ngModel)]="product.description" 
+#description="ngModel" 
+required/>
+
+<div class="invalid-feedback mb-2" *ngIf="description.invalid && (description.dirty || description.touched)">
+    <div *ngIf="description.errors?.required">
+        Product description must be filled!
+    </div>
+</div>
+
+<label for="inputPrice" class="sr-only"></label>
+<input type="number" id="inputPrice" 
+name="priceProduct"
+placeholder="Product price" 
+class="form-control mb-2 col-md-2"
+[ngClass]="{
+    'is-invalid': price.invalid && (price.dirty || price.touched),
+    'is-valid': price.valid && (price.dirty || price.touched)
+   }"
+[(ngModel)]="product.price" 
+#price="ngModel" 
+required/>
+
+<div class="invalid-feedback mb-2" *ngIf="price.invalid && (price.dirty || price.touched)">
+    <div *ngIf="price.errors?.required">
+        Product price must be filled!
+    </div>
+</div>
+
+<div class="input group mb-2">
+    <div class="custom-file col-md-4">
+        <input type="file" class="custom-file-input" id="inputFile"/>
+        <label for="inputFile" class="custom-file-label">Choose a picture</label>
+
+    </div>
+</div>
+
+<button class="btn btn-primary" (click)="register()" type="submit">Register</button>
+
