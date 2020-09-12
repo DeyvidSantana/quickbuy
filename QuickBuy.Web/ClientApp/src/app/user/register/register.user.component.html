@@ -1,6 +1,6 @@
 <div class="text-center">
     <form class="form-signin">
-        <h6 class="mb-4 login">Create account!</h6>
+        <h2 class="mb-4 login">Create account!</h2>
 
         <div class="form-group">
             <label for="inputEmail" class="sr-only">E-mail</label>
@@ -38,7 +38,8 @@
 
         <div class="form-group">
             <label for="inputName" class="sr-only">Name</label>
-            <input type="text" id="inputName" name="name" placeholder="Name" class="form-control mb-2" [ngClass]="{
+            <input type="text" id="inputName" name="name" placeholder="Name" class="form-control mb-2" 
+                [ngClass]="{
                 'is-invalid': name.invalid && (name.dirty || name.touched),
                 'is-valid': name.valid && (name.dirty || name.touched)
                }" [(ngModel)]="user.name" #name="ngModel" required />
@@ -57,7 +58,7 @@
                 [ngClass]="{
                 'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched),
                 'is-valid': lastName.valid && (lastName.dirty || lastName.touched)
-               }" [(ngModel)]="lastName.name" #lastName="ngModel" required />
+               }" [(ngModel)]="user.lastName" #lastName="ngModel" required />
         </div>
 
         <div class="invalid-feedback mb-2" *ngIf="lastName.invalid &&
@@ -67,7 +68,7 @@
             </div>
         </div>
 
-        <button class="btn btn-primary btn-block mb-3" type="submit" (click)="register()" [disabled]="spinner">
+        <button class="btn btn-primary btn-block mb-3" type="submit" (click)="register()" [disabled]="active_spinner">
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="spinner"></span>
             Register
         </button>
@@ -76,6 +77,9 @@
 
         <div class="alert alert-danger" *ngIf="message">
             {{ message }}
+        </div>
+        <div class="alert alert-success" *ngIf="registeredUser">
+            User has been registered sucessfully <a class="alert-link" [routerLink]='["/login"]'>Click here</a> to access the system with your account!
         </div>
 
         <img src="../../../assets/img/quickbuy-logo.jpg" />

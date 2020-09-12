@@ -16,5 +16,10 @@ namespace QuickBuy.Repository.Repositories
             return QuickBuyContext.Users.FirstOrDefault(u => u.Email == email
                                                             && u.Password == password);
         }
+
+        public User Get(string email)
+        {
+            return QuickBuyContext.Users.FirstOrDefault(u => u.Email == email);
+        }
     }
 }

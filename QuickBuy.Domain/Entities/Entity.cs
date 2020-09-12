@@ -23,14 +23,19 @@ namespace QuickBuy.Domain.Entities
             MessagesValidation.Add(message);
         }
 
+        public string GetValidationMessage()
+        {
+            return string.Join(". ", MessagesValidation);
+        }
+
         public abstract void Validate();
 
         /// <summary>
         /// A class is valid if there is no message validation, i.e., no violation.
         /// </summary>
-        protected bool IsValid
+        public bool IsValid
         {
-            get { return MessagesValidation.Any(); }
+            get { return !MessagesValidation.Any(); }
         }
     }
 }

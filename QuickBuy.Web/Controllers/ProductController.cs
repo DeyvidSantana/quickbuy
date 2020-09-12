@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using QuickBuy.Domain.Contracts;
 using QuickBuy.Domain.Entities;
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace QuickBuy.Web.Controllers
 {
@@ -12,10 +13,16 @@ namespace QuickBuy.Web.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository _productRepository;
+        private IHttpContextAccessor _httpContextAccessor;
+        private IHostingEnvironment _hostingEnvironment;
 
-        public ProductController(IProductRepository productRepository)
+        public ProductController(IProductRepository productRepository,
+            IHttpContextAccessor httpContextAccessor,
+            IHostingEnvironment hostingEnvironment)
         {
             _productRepository = productRepository;
+            _httpContextAccessor = httpContextAccessor;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         [HttpGet]
@@ -36,9 +43,10 @@ namespace QuickBuy.Web.Controllers
         {
             try
             {
-                if(product == null)
+                product.Validate();
+                if (!product.IsValid)
                 {
-                    return BadRequest("Product parameter is null!");
+                    return BadRequest(product.GetValidationMessage());
                 }
 
                 _productRepository.Add(product);
@@ -48,6 +56,40 @@ namespace QuickBuy.Web.Controllers
             {
                 return BadRequest(ex.ToString());
             }
+        }
+
+        [HttpPost("SendFile")]
+        public IActionResult SendFile()
+        {
+            try
+            {
+                var formFile = _httpContextAccessor.HttpContext.Request.Form.Files["fileSent"];
+                var fileName = formFile.FileName;
+                var extension = fileName.Split(".").Last();
+                var newFileName = GenerateNewFileName(fileName, extension);
+                var filesPath = _hostingEnvironment.WebRootPath + "\\files\\";
+                var fullName = filesPath + newFileName;
+
+                using (var fileStream = new FileStream(fullName, FileMode.Create))
+                {
+                    formFile.CopyTo(fileStream);
+                }
+
+                return Json(newFileName);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+
+        private string GenerateNewFileName(string fileName, string extension)
+        {
+            var arrayCompressedName = Path.GetFileNameWithoutExtension(fileName).Take(10).ToArray();
+            var newFileName = new string(arrayCompressedName).Replace(" ", "-") + ".";
+            newFileName = $"{newFileName}_{DateTime.Now.Year}{DateTime.Now.Month}{DateTime.Now.Day}{DateTime.Now.Hour}{DateTime.Now.Minute}{DateTime.Now.Second}.{extension}";
+            return newFileName;
         }
     }
 }

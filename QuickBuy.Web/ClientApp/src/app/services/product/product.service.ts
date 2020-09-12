@@ -6,8 +6,7 @@ import { Observable } from "rxjs";
 @Injectable({
     providedIn: "root"
 })
-export class ProductService implements OnInit{
-
+export class ProductService implements OnInit{    
     private _baseUrl: string;
     public products: Product[];
 
@@ -24,7 +23,16 @@ export class ProductService implements OnInit{
     }
 
     public register(product: Product): Observable<Product>{        
-        return this.http.post<Product>(this._baseUrl + "api/product/register", JSON.stringify(product), {headers: this.headers});
+        const headers = new HttpHeaders().set('content-type', 'application/json');
+
+        var body = {
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            fileName: product.fileName
+        };
+
+        return this.http.post<Product>(this._baseUrl + "api/product", body, {headers});
     }
 
     public save(product: Product): Observable<Product>{        
@@ -41,5 +49,12 @@ export class ProductService implements OnInit{
 
     public getProduct(productId: number): Observable<Product> {
         return this.http.get<Product>(this._baseUrl + "api/product");
+    }
+
+    public sendFile(selectedArchive: File): Observable<string> {
+        const formData: FormData = new FormData();
+        formData.append("fileSent", selectedArchive, selectedArchive.name);
+
+        return this.http.post<string>(this._baseUrl + "api/product/sendFile", formData);
     }
 }

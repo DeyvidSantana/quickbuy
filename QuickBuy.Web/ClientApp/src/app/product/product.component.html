@@ -59,11 +59,16 @@ required/>
 
 <div class="input group mb-2">
     <div class="custom-file col-md-4">
-        <input type="file" class="custom-file-input" id="inputFile"/>
+        <input type="file" class="custom-file-input" id="inputFile" (change)="inputChange($event.target.files)"/>
         <label for="inputFile" class="custom-file-label">Choose a picture</label>
-
     </div>
 </div>
 
-<button class="btn btn-primary" (click)="register()" type="submit">Register</button>
+<button class="btn btn-primary mb-2" (click)="register()" type="submit" [disabled]="active_spinner">
+    <span class="spinner-grow spinner-grow-sm" role="status" *ngIf="active_spinner"></span>
+    Register
+</button>
+<div class="alert alert-danger col-md-4" role="alert" *ngIf="message">
+    {{message}}
+</div>
 

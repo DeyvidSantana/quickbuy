@@ -31,6 +31,10 @@ export class UserService {
         this._user = null;
     }
 
+    get headers(): HttpHeaders {
+        return new HttpHeaders().set('content-type', 'application-json');
+    }
+
     constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
         this.baseURL = baseUrl;
     }
