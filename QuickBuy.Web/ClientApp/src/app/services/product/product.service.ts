@@ -26,6 +26,7 @@ export class ProductService implements OnInit{
         const headers = new HttpHeaders().set('content-type', 'application/json');
 
         var body = {
+            id: product.id,
             name: product.name,
             description: product.description,
             price: product.price,
@@ -39,8 +40,18 @@ export class ProductService implements OnInit{
         return this.http.post<Product>(this._baseUrl + "api/product/save", JSON.stringify(product), {headers: this.headers});
     }
 
-    public delete(product: Product): Observable<Product>{       
-        return this.http.post<Product>(this._baseUrl + "api/product/delete", JSON.stringify(product), {headers: this.headers});
+    public delete(product: Product): Observable<Product[]>{ 
+        const headers = new HttpHeaders().set('content-type', 'application/json');
+
+        var body = {
+            id: product.id,
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            fileName: product.fileName
+        };
+
+        return this.http.post<Product[]>(this._baseUrl + "api/product/delete", body, {headers});
     }
 
     public getAllProducts(): Observable<Product[]>{

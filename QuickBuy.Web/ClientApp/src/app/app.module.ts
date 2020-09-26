@@ -13,6 +13,7 @@ import { ProductComponent } from './product/product.component';
 import { LoginComponent } from './user/login/login.component';
 import { UserService } from './services/user/user.service';
 import { ProductService } from './services/product/product.service';
+import { SearchProductComponent } from './product/search/search.product.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ProductService } from './services/product/product.service';
     HomeComponent,
     ProductComponent,
     LoginComponent,
-    RegisterUserComponent
+    RegisterUserComponent,
+    SearchProductComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -31,7 +33,8 @@ import { ProductService } from './services/product/product.service';
       { path: '', component: HomeComponent, pathMatch: 'full' },      
       { path: 'product', component: ProductComponent},
       { path: 'login', component: LoginComponent },
-      { path: 'new-user', component: RegisterUserComponent }
+      { path: 'new-user', component: RegisterUserComponent },
+      { path: 'search-product', component: SearchProductComponent }
     ])
   ],
   providers: [UserService, ProductService],

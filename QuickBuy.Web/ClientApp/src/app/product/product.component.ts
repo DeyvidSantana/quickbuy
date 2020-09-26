@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ProductService } from './../services/product/product.service';
 import { Product } from './../models/product';
 import { Component, OnInit } from "@angular/core";
@@ -14,12 +15,18 @@ export class ProductComponent implements OnInit {
   public active_spinner: boolean; 
   public message: string;
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService,
+    private router: Router) {
 
   }
 
   ngOnInit(): void {
-    this.product = new Product();
+    var productSession = sessionStorage.getItem('productSession');
+    if(productSession){
+      this.product = JSON.parse(productSession);
+    } else {
+      this.product = new Product();
+    }  
   }
 
   public inputChange(files: FileList){
@@ -27,8 +34,7 @@ export class ProductComponent implements OnInit {
     this.productService.sendFile(this.selectedFile)
       .subscribe(
         fileName => {
-          this.product.fileName = fileName;
-          alert(this.product.fileName)
+          this.product.fileName = fileName;          
           console.log(fileName);
           this.disableLoading();
         },
@@ -46,6 +52,7 @@ export class ProductComponent implements OnInit {
         product => {
           console.log(product)
           this.disableLoading();
+          this.router.navigate(['/search-product']);
         }, e => {
           console.log(e)
           this.message = e.error

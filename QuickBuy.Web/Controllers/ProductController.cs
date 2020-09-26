@@ -30,7 +30,7 @@ namespace QuickBuy.Web.Controllers
         {
             try
             {
-                return Ok(_productRepository.GetAll());
+                return Json(_productRepository.GetAll());
             }
             catch (Exception ex)
             {
@@ -44,13 +44,29 @@ namespace QuickBuy.Web.Controllers
             try
             {
                 product.Validate();
-                if (!product.IsValid)
-                {
-                    return BadRequest(product.GetValidationMessage());
-                }
+                if (!product.IsValid)                
+                    return BadRequest(product.GetValidationMessage());                
 
-                _productRepository.Add(product);
+                if(product.Id > 0)                
+                    _productRepository.Update(product);                
+                else               
+                    _productRepository.Add(product);                
+
                 return Created("api/product", product);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+
+        [HttpPost("Delete")]
+        public IActionResult Delete([FromBody] Product product)
+        {
+            try
+            {
+                _productRepository.Delete(product);
+                return Json(_productRepository.GetAll());
             }
             catch (Exception ex)
             {
