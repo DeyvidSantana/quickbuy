@@ -30,6 +30,7 @@ export class SearchProductComponent implements OnInit  {
     }
 
     public addProduct(){
+        sessionStorage.setItem('productSession', "");
         this.router.navigate(['/product']);
     }
 

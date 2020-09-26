@@ -30,11 +30,15 @@ class="form-control mb-2 col-md-4"
    }"
 [(ngModel)]="product.description" 
 #description="ngModel" 
-required/>
+required
+minlength="50"/>
 
 <div class="invalid-feedback mb-2" *ngIf="description.invalid && (description.dirty || description.touched)">
     <div *ngIf="description.errors?.required">
         Product description must be filled!
+    </div>
+    <div *ngIf="description.errors.minlength">
+        Field must have at least 50 characters!
     </div>
 </div>
 
