@@ -11,7 +11,7 @@
           <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
             <a class="nav-link text-dark" [routerLink]='["/"]'>Home</a>
           </li>          
-          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="userAdministrator()">
             <a class="nav-link text-dark" [routerLink]='["/search-product"]'>Product</a>
           </li>
           <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="!loggedUser()">
@@ -29,6 +29,12 @@
             <ul class="dropdown-menu" aria-labelledby="linkMenu">
               <li class="dropdown-item" role="menu" [routerLink]='["/exit"]' (click)="exit()">Exit</li>
             </ul>
+          </li>
+
+          <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="anyItemsBuyCart()">
+            <a class="nav-link text-dark" [routerLink]='["/store-effectuate"]'>
+              <img src="assets/img/buy_cart.jpg" style="width: 32px; height: 32px;">
+            </a>
           </li>
           <!-- <li class="nav-item" [routerLinkActive]='["link-active"]' (click)="exit()" *ngIf="loggedUser()">
             <a class="nav-item nav-link text-dark" [routerLink]='[""]'>Exit</a>

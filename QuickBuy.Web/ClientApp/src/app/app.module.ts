@@ -1,3 +1,4 @@
+import { OrderService } from './services/order/order.service';
 import { StoreProductComponent } from './store/product/store.product.component';
 import { StoreSearchComponent } from './store/search/store.search.component';
 import { RegisterUserComponent } from './user/register/register.user.component';
@@ -39,17 +40,16 @@ import { StoreEffectuateComponent } from './store/effectuate/store.effectuate.co
     TruncateModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },      
-      { path: 'product', component: ProductComponent},
+      { path: 'product', component: ProductComponent, canActivate: [RoutesGuard] },
       { path: 'login', component: LoginComponent },
       { path: 'new-user', component: RegisterUserComponent },
-      { path: 'search-product', component: SearchProductComponent },
+      { path: 'search-product', component: SearchProductComponent, canActivate: [RoutesGuard] },
       { path: 'store-product', component: StoreProductComponent },
-      { path: 'store-effectuate', component: StoreEffectuateComponent }
+      { path: 'store-effectuate', component: StoreEffectuateComponent, canActivate: [RoutesGuard] }
     ])
   ],
-  providers: [UserService, ProductService],
+  providers: [UserService, ProductService, OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 
-//{ path: 'product', component: ProductComponent, canActivate: [RoutesGuard] },

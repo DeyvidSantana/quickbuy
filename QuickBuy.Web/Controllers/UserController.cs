@@ -39,6 +39,8 @@ namespace QuickBuy.Web.Controllers
                 if (registeredUser != null)                
                     return BadRequest("User already registered in the system!");
 
+                //user.IsAdministrator = true;
+
                 _userRepository.Add(user);
 
                 return Ok();

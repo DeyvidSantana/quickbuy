@@ -26,6 +26,10 @@ export class UserService {
         return this._user != null && this._user.email != "" && this._user.password != "";
     }
 
+    public userAdministrator(): boolean {
+        return this.authenticatedUser() && this.user.isAdministrator;
+    }
+
     public cleanSession() {
         sessionStorage.setItem("authenticated-user", "");
         this._user = null;

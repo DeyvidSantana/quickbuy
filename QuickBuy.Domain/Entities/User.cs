@@ -9,6 +9,8 @@ namespace QuickBuy.Domain.Entities
         public string Password { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
+        public bool IsAdministrator { get; set; }
+
         /// <summary>
         /// A user may have no or many orders
         /// </summary>
