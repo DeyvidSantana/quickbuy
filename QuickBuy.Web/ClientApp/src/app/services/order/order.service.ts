@@ -24,9 +24,11 @@ export class OrderService {
             state: order.state,
             city: order.city,
             fullAddress: order.fullAddress,
+            CEP: order.cep,
             numberAddress: order.numberAddress,
             formPaymentId: order.formPaymentId,
-            orderItems: order.orderItems
+            orderItems: order.orderItems,
+            userId: order.userId
         };
 
         return this.http.post<number>(this._baseUrl + 'api/order', body, {headers})

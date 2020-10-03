@@ -5,6 +5,7 @@ using System;
 
 namespace QuickBuy.Web.Controllers
 {
+    [Route("api/[Controller]")]
     public class OrderController : Controller
     {
         private readonly IOrderRepository _orderRepository;

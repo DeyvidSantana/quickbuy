@@ -1,3 +1,4 @@
+import { StorePurchaseMadeComponent } from './store/effectuate/store.purchase.made.component';
 import { OrderService } from './services/order/order.service';
 import { StoreProductComponent } from './store/product/store.product.component';
 import { StoreSearchComponent } from './store/search/store.search.component';
@@ -31,7 +32,8 @@ import { StoreEffectuateComponent } from './store/effectuate/store.effectuate.co
     SearchProductComponent,
     StoreSearchComponent,
     StoreProductComponent,
-    StoreEffectuateComponent
+    StoreEffectuateComponent,
+    StorePurchaseMadeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -45,7 +47,8 @@ import { StoreEffectuateComponent } from './store/effectuate/store.effectuate.co
       { path: 'new-user', component: RegisterUserComponent },
       { path: 'search-product', component: SearchProductComponent, canActivate: [RoutesGuard] },
       { path: 'store-product', component: StoreProductComponent },
-      { path: 'store-effectuate', component: StoreEffectuateComponent, canActivate: [RoutesGuard] }
+      { path: 'store-effectuate', component: StoreEffectuateComponent, canActivate: [RoutesGuard] },
+      { path: 'store-purchase-made', component: StorePurchaseMadeComponent }
     ])
   ],
   providers: [UserService, ProductService, OrderService],

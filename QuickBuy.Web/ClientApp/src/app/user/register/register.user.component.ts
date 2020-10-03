@@ -13,9 +13,10 @@ export class RegisterUserComponent implements OnInit{
     public active_spinner: boolean;
     public message: string;
     public registeredUser: boolean;
+    public authenticatedUser: boolean;
 
     constructor(private userService: UserService){
-
+        this.authenticatedUser = userService.authenticatedUser();
     }
 
     ngOnInit(): void {

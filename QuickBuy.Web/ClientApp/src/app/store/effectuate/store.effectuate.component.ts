@@ -63,7 +63,7 @@ export class StoreEffectuateComponent implements OnInit{
                 sessionStorage.setItem("orderId", orderId.toString());
                 this.products = [];
                 this.storeBuyCart.cleanBuyCart();
-                this.router.navigate(["/successful-purchase"]);
+                this.router.navigate(["/store-purchase-made"]);
             }, e => {
 
             });
@@ -79,6 +79,7 @@ export class StoreEffectuateComponent implements OnInit{
         order.expectedDeliveryDate = new Date();
         order.formPaymentId = 1;
         order.numberAddress = 999999999;
+        order.fullAddress = "Rua do Sossego"
 
         this.products = this.storeBuyCart.getProducts();
         for(let product of this.products){
